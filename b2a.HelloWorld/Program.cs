@@ -7,7 +7,8 @@ namespace b2a.HelloWorld
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to B2A Technologies!");
-            
+            Console.WriteLine("Hello Everyone!");
+
         }
     }
 }
