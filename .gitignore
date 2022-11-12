@@ -4,3 +4,5 @@
 
 /.vs
 /b2a.HelloWorld/obj
+/b2a.HelloWorld/bin/Debug/net5.0
+/b2a.SK.LearnCSharp/obj
