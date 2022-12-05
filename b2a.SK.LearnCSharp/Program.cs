@@ -9,6 +9,7 @@ namespace b2a.SK.LearnCSharp
         {
             Console.WriteLine("Hello World!");
             Student bharat = new Student(1,"Bharat","Mane");
+            bharat.Id = 1;
             Student jitu= new Student(1, "Jitendra");
             JuniorKGStudent pari = new JuniorKGStudent(3, "Pari", "Ahir");
             pari.PrintStudentInformation();

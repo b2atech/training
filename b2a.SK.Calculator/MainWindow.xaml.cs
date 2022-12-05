@@ -25,12 +25,12 @@ namespace b2a.SK.Calculator
             InitializeComponent();
         }
 
-        
-        private void btn7_Click(object sender, RoutedEventArgs e)
+        private void btn_Click(object sender, RoutedEventArgs e)
         {
-            UpdateNewValue(7);
+            Button button = (Button) sender ;
+            int number = int.Parse(button.Content.ToString());
+            UpdateNewValue(number);
         }
-
         private void UpdateNewValue(int number)
         {
             int origional = 0;
@@ -44,14 +44,6 @@ namespace b2a.SK.Calculator
             txtValue.Text = newValue.ToString();
         }
 
-        private void btn8_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateNewValue(8);
-        }
-
-        private void btn9_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateNewValue(9);
-        }
+       
     }
 }

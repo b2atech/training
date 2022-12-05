@@ -13,6 +13,19 @@ namespace b2a.SK.SchoolManagement
         private string firstName;
         private string lastName;
         protected int rollNumber;
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
+
         public Student(int id, string firstName, string lastName)
         {
             this.id = id;
