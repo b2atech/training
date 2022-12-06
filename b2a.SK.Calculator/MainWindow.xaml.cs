@@ -31,6 +31,27 @@ namespace b2a.SK.Calculator
             int number = int.Parse(button.Content.ToString());
             UpdateNewValue(number);
         }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtName.Text))
+            {
+                txtMessage.Text = "Name is mandatory, please add name!";
+                return;
+            }
+            if (lstNames.Items.Contains(txtName.Text))
+            {
+                txtMessage.Text = "Name already exist, please add new name!";
+                return;
+            }
+            if (txtName.Text.Trim().IndexOf(' ') < 0)
+            {
+                txtMessage.Text = "Name is invalid, there should be at least one space in your name!";
+                return;
+            }
+
+            lstNames.Items.Add(txtName.Text);
+        }
         private void UpdateNewValue(int number)
         {
             int origional = 0;

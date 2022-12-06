@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:b2a.SK.Calculator"
         mc:Ignorable="d"
-        Title="Hello WPF" Height="450" Width="800">
+        Title="Hello WPF" Height="550" Width="800">
     <Grid Margin="50">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -13,12 +13,14 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBox x:Name="txtValue" 
                  Grid.Row="0"
@@ -93,5 +95,35 @@
                 Margin="5"
                 Background="Black"
                 Foreground="White"></Button>
+
+        <StackPanel Grid.Row="5" 
+                    Grid.Column="0" 
+                    Orientation="Vertical"
+                    Grid.ColumnSpan="5">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        Width="300">
+                <Label Content="Name:"
+                       Width="70"/>
+                <TextBox x:Name="txtName" Width="150"/>
+                <Button Content="Add Item" 
+                        Margin="10 0 0 0"
+                        HorizontalAlignment="Right"
+                        Click="btnAdd_Click" />
+            </StackPanel>
+           
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        Width="300">
+                <Label Content="Names:" 
+                       Width="70"/>
+                <ListBox x:Name="lstNames"
+                     Height="200"
+                     Width="150"/>
+            </StackPanel>
+            
+            <TextBlock x:Name="txtMessage" 
+                       Foreground="Red"/>
+        </StackPanel>
     </Grid>
 </Window>
