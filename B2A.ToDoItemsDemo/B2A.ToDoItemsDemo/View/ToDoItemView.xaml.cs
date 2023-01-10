@@ -21,15 +21,15 @@ namespace B2A.ToDoItemsDemo.View
     /// </summary>
     public partial class ToDoItemView : Window
     {
-        public ToDoItemView(MainViewModel mainViewModel)
+        public ToDoItemView(MainViewModel mainViewModel,Action RefreshOnChange)
         {
             InitializeComponent();
-            this.DataContext = new ToDoItemViewModel(this, mainViewModel);
+            this.DataContext = new ToDoItemViewModel(this, mainViewModel, RefreshOnChange);
         }
-        public ToDoItemView(MainViewModel mainViewModel, ToDoItemDetailViewModel selectedItem)
+        public ToDoItemView(MainViewModel mainViewModel, ToDoItemDetailViewModel selectedItem,Action RefreshOnChange)
         {
             InitializeComponent();
-            this.DataContext = new ToDoItemViewModel(this, mainViewModel, selectedItem);
+            this.DataContext = new ToDoItemViewModel(this, mainViewModel, selectedItem, RefreshOnChange);
         }
     }
 }

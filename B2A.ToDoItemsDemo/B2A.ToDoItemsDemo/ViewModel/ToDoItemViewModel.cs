@@ -18,6 +18,7 @@ namespace B2A.ToDoItemsDemo.ViewModel
 
         #region Properties
         private bool isInEditMode;
+        private Action bharat;
         private ToDoItemDetailViewModel _selectedItem;
         private Window currentWindow;
         private MainViewModel mainViewModel;
@@ -194,14 +195,18 @@ namespace B2A.ToDoItemsDemo.ViewModel
         #endregion
 
         #region Constructors
-        public ToDoItemViewModel(Window window, MainViewModel mainViewModel)
+        public ToDoItemViewModel(Window window, MainViewModel mainViewModel,Action RefreshOnChange)
         {
+
+            this.currentWindow = window;
+            this.mainViewModel = mainViewModel;
+            this.bharat = RefreshOnChange;
+
+            this.DueDate = DateTime.Now.AddDays(1);
             isInEditMode = false;
             AddUpdateButtonTitle = "Add";
-            this.mainViewModel = mainViewModel;
-            currentWindow = window;
-            this.DueDate = DateTime.Now.AddDays(1);
-             
+
+
             //1.
             //List<string> categories = DataService.GetAllCategories();
             //CategoryList = new ObservableCollection<string>();
@@ -220,8 +225,8 @@ namespace B2A.ToDoItemsDemo.ViewModel
             CategoryList = DataService.GetAllCategories();
             SubCategoryList = new ObservableCollection<string>();
         }
-        public ToDoItemViewModel(Window window, MainViewModel mainViewModel, ToDoItemDetailViewModel selectedItem)
-            :this(window,mainViewModel)
+        public ToDoItemViewModel(Window window, MainViewModel mainViewModel, ToDoItemDetailViewModel selectedItem, Action RefreshOnChange)
+            :this(window,mainViewModel, RefreshOnChange)
         {
             
 
@@ -265,6 +270,7 @@ namespace B2A.ToDoItemsDemo.ViewModel
                 AddNewItem();
             }
             currentWindow.Close();
+            bharat();
         }
 
         private void AddNewItem()

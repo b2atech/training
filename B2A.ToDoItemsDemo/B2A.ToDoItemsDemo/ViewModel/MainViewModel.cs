@@ -97,7 +97,7 @@ namespace B2A.ToDoItemsDemo.ViewModel
         #region Methods
         private void ShowToDoItemDialog()
         {
-            ToDoItemView toDoItemView = new ToDoItemView(this);
+            ToDoItemView toDoItemView = new ToDoItemView(this, ReloadOnRefresh);
             toDoItemView.ShowDialog();
         }
 
@@ -132,8 +132,13 @@ namespace B2A.ToDoItemsDemo.ViewModel
 
         private void EditSelectedItem()
         {
-            ToDoItemView toDoItemView = new ToDoItemView(this,SelectedToDoItem);
+            ToDoItemView toDoItemView = new ToDoItemView(this,SelectedToDoItem, ReloadOnRefresh);
             toDoItemView.ShowDialog();
+        }
+
+        public void ReloadOnRefresh()
+        {
+
         }
         #endregion
 
