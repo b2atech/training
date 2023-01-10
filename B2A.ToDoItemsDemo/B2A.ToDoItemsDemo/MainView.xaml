@@ -1,0 +1,73 @@
+﻿<Window x:Class="B2A.ToDoItemsDemo.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:B2A.ToDoItemsDemo"
+        mc:Ignorable="d"
+        Title="To Do Items" Height="450" Width="800">
+    <Grid Margin="50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Welcome to my to do Items application!"
+                   FontSize="15"
+                   FontWeight="Bold"
+                   Grid.Row="0"/>
+        <StackPanel Orientation="Horizontal" 
+                    Margin="0 10"
+                    Grid.Row="1"
+                    HorizontalAlignment="Right">
+            <Button Command="{Binding EditCommand}"
+                Content="Edit"
+                    Margin="0 0 10 0"
+                HorizontalAlignment="Right"
+                 Width="70"/>
+            <Button Command="{Binding DeleteCommand}"
+                Content="Delete"
+                    Margin="0 0 10 0"
+                HorizontalAlignment="Right"
+                 Width="70"/>
+            <Button Command="{Binding AddToDoItemCommand}"
+                Content="Add"
+                HorizontalAlignment="Right"
+                 Width="70"/>
+
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding ToDoItemList}"
+                  SelectedItem="{Binding SelectedToDoItem}"
+                  SelectionMode="Single"
+                  CanUserAddRows="False"
+                  AutoGenerateColumns="False"
+                  Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"
+                                    Width="50"
+                                    Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Name"
+                                    Width="100"
+                                    Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Due Date"
+                                    Width="100"
+                                    Binding="{Binding DueDate, StringFormat=dd-MMM-yy}"/>
+                <DataGridTextColumn Header="Category"
+                                    Width="100"
+                                    Binding="{Binding Category}"/>
+                <DataGridTextColumn Header="Sub Category"
+                                    Width="100"
+                                    Binding="{Binding SubCategory}"/>
+                <DataGridTemplateColumn Header="Percentage"
+                                    Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ProgressBar Value="{Binding PercentDone}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

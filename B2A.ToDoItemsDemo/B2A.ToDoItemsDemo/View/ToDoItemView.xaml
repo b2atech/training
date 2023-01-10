@@ -1,0 +1,102 @@
+﻿<Window x:Class="B2A.ToDoItemsDemo.View.ToDoItemView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:B2A.ToDoItemsDemo.View"
+        mc:Ignorable="d"
+        Title="Add New To Do Item " Height="350" Width="550">
+    <Window.Resources>
+        <Style TargetType="{x:Type DatePickerTextBox}">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <TextBox x:Name="PART_TextBox"
+     Text="{Binding Path=SelectedDate, StringFormat='dd-MMM-yyyy', 
+     RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="50">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 5">
+                <TextBlock Text="Name" 
+                           Width="100"
+                           Margin="0 0 10 0"/>
+                <TextBox Text="{Binding Name}"
+                         Width="300"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 5">
+                <TextBlock Text="Categoty" 
+                           Width="100"
+                           Margin="0 0 10 0"/>
+                <ComboBox ItemsSource="{Binding CategoryList}"
+                          SelectedItem="{Binding SelectedCategory}"
+                          Width="300"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 5">
+                <TextBlock Text="Sub Categoty" 
+                           Width="100"
+                           Margin="0 0 10 0"/>
+                <ComboBox ItemsSource="{Binding SubCategoryList}"
+                          SelectedItem="{Binding SelectedSubCategory}"
+                          Width="300"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 5">
+                <TextBlock Text="Due Date" 
+                           Width="100"
+                           Margin="0 0 10 0"/>
+                <DatePicker Text="{Binding DueDate, StringFormat=dd-MMM-yyyy}"
+                            
+                            Width="300">
+                    <DatePicker.BlackoutDates>
+                        <CalendarDateRange Start="1/1/2020" End="1/8/2023"/>
+                    </DatePicker.BlackoutDates>
+                </DatePicker>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 5">
+                <TextBlock Text="Percentage" 
+                           Width="100"
+                           Margin="0 0 10 0"/>
+                <Slider Maximum="100" 
+                         Minimum="0"
+                         Value="{Binding PercentDone}"
+                         Width="300"/>
+                <!--<TextBox Text="{Binding PercentDone}"
+                         Width="300"/>-->
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 5">
+                <TextBlock Text="Is Done?" 
+                           Width="100"
+                           Margin="0 0 10 0"/>
+                <CheckBox  IsChecked="{Binding IsDone}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Command="{Binding ClearCommand}" 
+                    Width="70"
+                    Margin="0 0 10 0"
+                    Content="Clear"/>
+                <Button Command="{Binding SaveCommand}" 
+                    Width="70"
+                    Margin="0 0 10 0"
+                    Content="{Binding AddUpdateButtonTitle}"/>
+                <Button Command="{Binding CancelCommand}" 
+                    Width="70"
+                    Margin="0 0 10 0"
+                    Content="Cancel"/>
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+</Window>
