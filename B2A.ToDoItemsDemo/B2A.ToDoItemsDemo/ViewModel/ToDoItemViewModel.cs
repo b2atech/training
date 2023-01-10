@@ -18,7 +18,7 @@ namespace B2A.ToDoItemsDemo.ViewModel
 
         #region Properties
         private bool isInEditMode;
-        private Action bharat;
+        private Action _RefreshOnComplete;
         private ToDoItemDetailViewModel _selectedItem;
         private Window currentWindow;
         private MainViewModel mainViewModel;
@@ -200,7 +200,7 @@ namespace B2A.ToDoItemsDemo.ViewModel
 
             this.currentWindow = window;
             this.mainViewModel = mainViewModel;
-            this.bharat = RefreshOnChange;
+            this._RefreshOnComplete = RefreshOnChange;
 
             this.DueDate = DateTime.Now.AddDays(1);
             isInEditMode = false;
@@ -270,39 +270,37 @@ namespace B2A.ToDoItemsDemo.ViewModel
                 AddNewItem();
             }
             currentWindow.Close();
-            bharat();
+            _RefreshOnComplete();
         }
 
         private void AddNewItem()
         {
-            ToDoItemDetailViewModel toDoItem = new ToDoItemDetailViewModel();
+            ToDoItem toDoItem = new ToDoItem();
 
             toDoItem.Name = this.Name;
             toDoItem.Category = SelectedCategory;
             toDoItem.SubCategory = SelectedSubCategory;
             toDoItem.IsDone = IsDone;
             toDoItem.DueDate = this.DueDate;
-            
-            //if (this.PercentDone.HasValue == true)
-            //{
-            //    toDoItem.PercentDone = this.PercentDone.Value;
-            //}
-            //else
-            //{
-            //    toDoItem.PercentDone = 0;
-            //}
-            
             toDoItem.PercentDone = PercentDone.HasValue? PercentDone.Value : 0;
 
-            mainViewModel.ToDoItemList.Add(toDoItem);
+            DataService.AddToDoItem(toDoItem);
         }
 
         private void UpdateCurrentItem()
         {
-            _selectedItem.Name = this.Name;
-            _selectedItem.Category = SelectedCategory;
-            _selectedItem.SubCategory = SelectedSubCategory;
-            _selectedItem.IsDone = IsDone;
+            ToDoItem toDoItem = new ToDoItem();
+
+            toDoItem.Id = _selectedItem.Id;
+
+            toDoItem.Name = this.Name;
+            toDoItem.Category = SelectedCategory;
+            toDoItem.SubCategory = SelectedSubCategory;
+            toDoItem.IsDone = IsDone;
+            toDoItem.DueDate = this.DueDate;
+            toDoItem.PercentDone = PercentDone.HasValue ? PercentDone.Value : 0;
+
+            DataService.UpdateToDoItem(toDoItem);
         }
 
         private void Clear()

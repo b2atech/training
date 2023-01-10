@@ -1,12 +1,9 @@
 ﻿using B2A.ToDoItemsDemo.Model;
+using B2A.ToDoItemsDemo.Services;
 using B2A.ToDoItemsDemo.View;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace B2A.ToDoItemsDemo.ViewModel
@@ -91,7 +88,11 @@ namespace B2A.ToDoItemsDemo.ViewModel
         public MainViewModel()
         {
             ToDoItemList = new ObservableCollection<ToDoItemDetailViewModel>();
+
+            LoadAllGetItems();
         }
+
+        
         #endregion
 
         #region Methods
@@ -122,7 +123,8 @@ namespace B2A.ToDoItemsDemo.ViewModel
 
             if(messageBoxResult == MessageBoxResult.Yes)
             {
-                ToDoItemList.Remove(SelectedToDoItem);
+                DataService.DleteToDoItem(SelectedToDoItem.Id);
+                LoadAllGetItems();
             }
         }
         private bool CanEdit()
@@ -138,7 +140,27 @@ namespace B2A.ToDoItemsDemo.ViewModel
 
         public void ReloadOnRefresh()
         {
+            LoadAllGetItems();
+        }
+        private void LoadAllGetItems()
+        {
+            ToDoItemList.Clear();
 
+            List<ToDoItem> items = DataService.GetAllToDoItems();
+
+            foreach (var item in items)
+            {
+                ToDoItemDetailViewModel itemViewModel = new ToDoItemDetailViewModel();
+                itemViewModel.Id = item.Id;
+                itemViewModel.Name = item.Name;
+                itemViewModel.PercentDone = item.PercentDone;
+                itemViewModel.DueDate = item.DueDate;
+                itemViewModel.Category = item.Category;
+                itemViewModel.SubCategory = item.SubCategory;
+                itemViewModel.IsDone = item.IsDone;
+
+                ToDoItemList.Add(itemViewModel);
+            }
         }
         #endregion
 
